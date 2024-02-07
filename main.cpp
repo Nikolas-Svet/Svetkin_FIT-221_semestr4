@@ -1,4 +1,8 @@
-//
-// Created by Никита Светкин on 07.02.2024.
-//
+#include <iostream>
+#include "matrix_oop.h"
 
+using namespace std;
+
+int main() {
+    Matrix m = Matrix(5, 5);
+};
