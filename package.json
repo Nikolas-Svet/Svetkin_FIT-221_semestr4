@@ -1,0 +1,14 @@
+{
+  "name": "semestr4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tests",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.3.0"
+  }
+}
