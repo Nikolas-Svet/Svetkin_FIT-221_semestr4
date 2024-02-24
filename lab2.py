@@ -129,6 +129,12 @@ result = filter(lambda x: x[0] < x[1], zip(numbers[:-1], numbers[1:]))
 # Функция оставляет все кортежи, где функция выводит True
 print(" ".join([str(max(i)) for i in list(result)]))
 
+print("\nДесятое")
+
+array = [4, -4 ,6, -7, 5, 5, -3, -2]
+result = list(filter(lambda x: x[0] * x[1] > 0, zip(array[:-1], array[1:])))
+print(result[0] if len(result) > 0 else "")
+
 print("\nОдиннадцатое")
 
 a = [1, 4, 7, 2, 63, 53, 78, 32, 24]
