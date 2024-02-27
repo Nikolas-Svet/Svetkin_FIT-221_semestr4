@@ -1,6 +1,7 @@
 #include "matrix_oop.h"
 #include <iostream>
 #include "matrix_exception.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -51,9 +52,12 @@ int Matrix::get_rows_() {
 }
 
 void Matrix::Print() const {
+    int setprec_num = 2;
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
-            cout << matrix_[i][j] << " ";
+            if (matrix_[i][j] > 99) setprec_num = 3;
+            cout << setprecision(setprec_num) << matrix_[i][j] << "\t";
+            setprec_num = 2;
         }
         cout << endl;
     }
