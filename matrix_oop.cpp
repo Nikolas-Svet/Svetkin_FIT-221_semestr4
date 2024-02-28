@@ -154,7 +154,7 @@ Matrix Matrix::CalcComplements() const {
     Matrix result(rows_ - 1, cols_ - 1);
     // Создаем новую матрицу для хранения результата умножения
     Matrix calc(rows_, cols_);
-    int current_rows_result = 0, current_cols_result = 0;
+    int current_rows_result, current_cols_result;
     for (int current_rows = 0; current_rows < rows_; ++current_rows)
         for (int current_cols = 0; current_cols < cols_; ++current_cols) {
             current_rows_result = 0;
@@ -207,7 +207,6 @@ double Matrix::Determinant() {
     // Инициализируем вектор перестановок
     std::vector<int> permutation(n);
     for (int i = 0; i < n; ++i) {
-//        cout << i << endl;
         permutation[i] = i;
     }
 
@@ -217,17 +216,14 @@ double Matrix::Determinant() {
     // Перебираем все перестановки индексов строк
     do {
         // Вычисляем значение определителя для текущей перестановки
-//        cout << "n = " << n << endl;
         int term = 1;
         for (int i = 0; i < n; ++i) {
             term *= matrixData[i][permutation[i]];
-//            cout << "Term   " << matrixData[i][permutation[i]] << "   " << term << endl;
         }
         int sign = 1;
         for (int i = 0; i < n; ++i) {
             for (int j = i + 1; j < n; ++j) {
                 if (permutation[i] > permutation[j]) {
-//                    cout << "Term = " << term  << "   " << permutation[i] << "    " << permutation[j] << endl;
                     sign *= -1;
                 }
             }
