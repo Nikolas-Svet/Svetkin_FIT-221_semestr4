@@ -56,7 +56,7 @@ void Matrix::Print() const {
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
             if (matrix_[i][j] > 99) setprec_num = 3;
-            cout << setprecision(setprec_num) << matrix_[i][j] << "\t";
+            cout << "\t" << setprecision(setprec_num) << matrix_[i][j] << "\t";
             setprec_num = 2;
         }
         cout << endl;
@@ -81,8 +81,13 @@ bool Matrix::EqMatrix(const Matrix &other) const {
 // Функция для сложения матриц
 void Matrix::SumMatrix(const Matrix &other) {
     // Проверяем, имеют ли матрицы одинаковый размер
-    if (rows_ != other.rows_ || cols_ != other.cols_) {
-        throw MatrixException("Matrices have different dimensions."); // Генерируем исключение
+    try {
+        if (rows_ != other.rows_ || cols_ != other.cols_) {
+            throw MatrixException("Matrices have different dimensions."); // Генерируем исключение
+        }
+    } catch (const MatrixException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return;
     }
     // Складываем соответствующие элементы матриц
     for (int i = 0; i < rows_; ++i) {
@@ -95,8 +100,13 @@ void Matrix::SumMatrix(const Matrix &other) {
 // Функция для вычитания матриц
 void Matrix::SubMatrix(const Matrix &other) {
     // Проверяем, имеют ли матрицы одинаковый размер
-    if (rows_ != other.rows_ || cols_ != other.cols_) {
-        throw MatrixException("Matrices have different dimensions."); // Генерируем исключение
+    try {
+        if (rows_ != other.rows_ || cols_ != other.cols_) {
+            throw MatrixException("Matrices have different dimensions."); // Генерируем исключение
+        }
+    } catch (const MatrixException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return;
     }
     // Вычитаем соответствующие элементы матриц
     for (int i = 0; i < rows_; ++i) {
@@ -119,9 +129,14 @@ void Matrix::MulNumber(const double num) {
 // Функция для умножения матриц
 void Matrix::MulMatrix(const Matrix &other) {
     // Проверяем, можно ли умножить матрицы
-    if (cols_ != other.rows_) {
-        throw MatrixException(
-                "Number of columns of first matrix must be equal to number of rows of second matrix."); // Генерируем исключение
+    try {
+        if (cols_ != other.rows_) {
+            throw MatrixException(
+                    "Number of columns of first matrix must be equal to number of rows of second matrix."); // Генерируем исключение
+        }
+    } catch (const MatrixException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return;
     }
     // Создаем новую матрицу для хранения результата умножения
     Matrix result(rows_, other.cols_);
@@ -148,10 +163,17 @@ Matrix Matrix::Transpose() {
 }
 
 Matrix Matrix::CalcComplements() const {
-    if (rows_ != cols_) {
-        throw MatrixException("Matrix is not square."); // Генерируем исключение
-    }
     Matrix result(rows_ - 1, cols_ - 1);
+
+    try {
+        if (rows_ != cols_) {
+            throw MatrixException("Matrix is not square."); // Генерируем исключение
+        }
+    } catch (const MatrixException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return result;
+    }
+
     // Создаем новую матрицу для хранения результата умножения
     Matrix calc(rows_, cols_);
     int current_rows_result, current_cols_result;
@@ -190,11 +212,16 @@ Matrix Matrix::CalcComplements() const {
 }
 
 double Matrix::Determinant() {
-    if (rows_ != cols_) {
-        throw MatrixException("Matrix is not square.");
+    try {
+        if (rows_ != cols_) {
+            throw MatrixException("Matrix is not square.");
+        }
+    } catch (const MatrixException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return 0;
     }
     // Создаем копию матрицы в виде вектора для удобства обработки
-    std::vector<std::vector<int>> matrixData(rows_, std::vector<int>(cols_));
+    vector<vector<int>> matrixData(rows_, vector<int>(cols_));
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
             matrixData[i][j] = matrix_[i][j];
@@ -237,14 +264,16 @@ double Matrix::Determinant() {
 }
 
 Matrix Matrix::InverseMatrix() {
-    if (rows_ != cols_) {
-        throw MatrixException("Matrix is not square."); // Генерируем исключение
+    bool flag = true;
+    try {
+        if (rows_ != cols_) {
+            throw MatrixException("Matrix is not square.");
+        }
+    } catch (const MatrixException& e) {
+        cerr << "Exception: " << e.what() << endl;
+        flag = false;
     }
-    double det = Determinant();
-    if (det == 0) {
-        throw MatrixException("Determinant of the matrix is zero."); // Генерируем исключение
-    }
-    return CalcComplements().Transpose() * (1.0 / Determinant());
+    if (flag) return CalcComplements().Transpose() * (1.0 / Determinant());
 }
 
 //                      Операторы
@@ -270,13 +299,21 @@ Matrix Matrix::operator*(const double num) const {
 }
 
 Matrix Matrix::operator*(const Matrix &other) const {
-    if (cols_ != other.rows_) {
-        throw MatrixException(
-                "Number of columns of first matrix must be equal to number of rows of second matrix."); // Генерируем исключение
+    bool flag = true;
+    try {
+        if (cols_ != other.rows_) {
+            throw MatrixException(
+                    "Number of columns of first matrix must be equal to number of rows of second matrix."); // Генерируем исключение
+        }
+    } catch (const MatrixException& e) {
+        cerr << "Exception: " << e.what() << endl;
+        flag = false;
     }
-    Matrix result = *this;
-    result.MulMatrix(other);
-    return result;
+    if (flag) {
+        Matrix result = *this;
+        result.MulMatrix(other);
+        return result;
+    }
 }
 
 // Оператор проверки на равенство матриц
@@ -330,8 +367,17 @@ Matrix &Matrix::operator*=(const Matrix &other) {
 // Оператор для доступа к элементам матрицы по индексам
 double &Matrix::operator()(int i, int j) {
     // Проверяем, находятся ли индексы в пределах матрицы
-    if (i < 0 || i >= rows_ || j < 0 || j >= cols_) {
-        throw MatrixException("Index out of range.");
+    // Создаем временную переменную для хранения результата
+    static double error_value = 0; // Значение по умолчанию для ошибки
+    double& result = error_value;
+    i --; j --;
+    try {
+        if (i < 0 || i >= rows_ || j < 0 || j >= cols_) {
+            throw MatrixException("Index out of range.");
+        }
+    } catch (const MatrixException& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        return result;
     }
     return matrix_[i][j];
 }

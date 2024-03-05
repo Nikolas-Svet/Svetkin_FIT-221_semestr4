@@ -1,3 +1,12 @@
 CMakeLists.txt
 cmake-build-debug
 https:
+.idea
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+test1
+CMakeFiles/
+Testing/
+C++_Semestr4.cbp
+test
