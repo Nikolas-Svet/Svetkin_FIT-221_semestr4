@@ -1,6 +1,6 @@
-# print("\nПервое")
-#
-# print(len(set(input().split())))
+print("\nПервое")
+
+print(len(set(input().split())))
 
 print("\nВторое")
 
@@ -14,11 +14,11 @@ print(set(array1) & set(array2))
 
 print("\nЧетвертое")
 
-# arr = [int(num) for num in input().split()]
-# a = set(filter(lambda x: arr.count(x) > 1, arr))
-# b = set(arr) - a
-# print("\nYES" * len(a))
-# print("\nNO" * len(b))
+arr = [int(num) for num in input().split()]
+a = set(filter(lambda x: arr.count(x) > 1, arr))
+b = set(arr) - a
+print("\nYES" * len(a))
+print("\nNO" * len(b))
 
 print("\nПятое")
 
@@ -60,6 +60,17 @@ for i in f:
 
 print("\nВосьмое")
 
-print("\nДевятое")
+n = int(input())
+string_list = []
 
-print("\nДесятое")
+for i in range(n):
+    s = input()
+    string_list.append(s)
+s = input()
+
+for i in string_list:
+    if s in i:
+        i = i.split()
+        del i[i.index(s)]
+        print(*i)
+        break
