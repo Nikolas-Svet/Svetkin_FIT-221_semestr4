@@ -1,18 +1,10 @@
-//
-// Cmpnt1.cpp
-// To compile, use: cl /LD Cmpnt1.cpp GUIDs.cpp UUID.lib Cmpnt1.def
-//
 #include <iostream>
 #include <objbase.h>
 #include "trace.h"
 using namespace std;
 #include "Iface.h"
 
-//void trace(const char* msg) { cout << "Component 1:\t" << msg << endl ;}
-
-//
 // Component
-//
 class CA : public IX
 {
 	// IUnknown implementation
