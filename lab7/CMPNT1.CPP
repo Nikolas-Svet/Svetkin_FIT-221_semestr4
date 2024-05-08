@@ -6,7 +6,7 @@
 #include <objbase.h>
 #include "trace.h"
 using namespace std;
-#include "IFACE.H"
+#include "Iface.h"
 
 //void trace(const char* msg) { cout << "Component 1:\t" << msg << endl ;}
 

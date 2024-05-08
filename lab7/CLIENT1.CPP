@@ -5,8 +5,8 @@
 #include <iostream>
 #include <objbase.h>
 #include "trace.h"
-#include "IFACE.H"
-#include "create.h"
+#include "Iface.h"
+#include "Create.h"
 
 using  namespace std;
 
@@ -49,6 +49,34 @@ int main()
 	{
 		trace("Could not get interface IX.") ;
 	}
+
+    IY* pIY ;
+    hr = pIUnknown->QueryInterface(IID_IY, (void**)&pIY) ;
+
+    if (SUCCEEDED(hr))
+    {
+        trace("Succeeded getting IY.") ;
+        pIY->Fy() ;          // Use interface IX.
+        pIY->Release() ;
+    }
+    else
+    {
+        trace("Could not get interface IY.") ;
+    }
+
+    IZ* pIZ ;
+    hr = pIUnknown->QueryInterface(IID_IZ, (void**)&pIZ) ;
+
+    if (SUCCEEDED(hr))
+    {
+        trace("Succeeded getting IZ.") ;
+        pIZ->Fz() ;          // Use interface IX.
+        pIZ->Release() ;
+    }
+    else
+    {
+        trace("Could not get interface IZ.") ;
+    }
 
 	trace("Release IUnknown interface.") ;
 	pIUnknown->Release() ;
