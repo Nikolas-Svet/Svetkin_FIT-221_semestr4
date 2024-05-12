@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clear Element</title>
+</head>
+<body>
+
+<ol id="list">
+    <li>Привет</li>
+    <li>Мир</li>
+</ol>
+
+<script>
+    function clear(elem) {
+        var element = document.getElementById(elem);
+
+        if (element) {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+        } else {
+            console.error('Элемент не найден');
+        }
+    }
+
+    clear('list');
+</script>
+
+</body>
+</html>
