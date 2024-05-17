@@ -7,19 +7,18 @@ function showImg() {
     if (imageUrls.length > 14) {
         alert("Больше 15 изображений нельзя вывести")
     } else {
-        fetch("https://dog.ceo/api/breeds/image/random")
-            .then(response => response.json())
-            .then(data => {
-                const imageUrl = data.message;
+        fetchImage()
+            .then(imageUrl => {
                 if (!imageUrls.includes(imageUrl)) {
                     imageUrls.push(imageUrl);
                     imageSizes[imageUrl] = { width: 200, height: 200 }; // Инициализируем размер
                     showImages();
                 }
             })
-            .catch(error => console.error('Ошибка при получении данных:', error));
+            .catch(error => console.error(error));
     }
 }
+
 
 function showImages() {
     const mainElement = document.querySelector('main');
