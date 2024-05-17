@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login {
+  width: 100%;
+  min-height: 100vh;
+  background-color: bisque;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.login h1 {
+  margin-bottom: 20px;
+  margin-right: 10px;
+  display: inline;
+}
+.login__content {
+  border: 1px solid black;
+  height: 50vh;
+  width: 50%;
+  background-color: #e4d7ab;
+  padding: 20px;
+  position: relative;
+}
+.login__content__img-dog {
+  position: absolute;
+  top: -101px;
+  left: 100px;
+  height: 100px;
+  width: 100px;
+}
+.login__content__img-bone {
+  height: 40px;
+  width: 40px;
+}
+.login__content span {
+  font-size: 20px;
+  display: block;
+}
+.login__content input {
+  height: 30px;
+  width: 70%;
+  background-color: bisque;
+  outline: none;
+  display: block;
+  margin-top: 20px;
+  border: 1px solid black;
+}
+.login__content button {
+  margin-top: 20px;
+  height: 10%;
+  width: 20%;
+  background-color: bisque;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.main {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  background-color: blanchedalmond;
+}
+.main header {
+  width: 100%;
+  height: 100px;
+  background-color: cornsilk;
+  border-bottom: 2px solid black;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main header span {
+  margin: 20px;
+  font-size: 20px;
+}
+.main header img {
+  height: 70px;
+  width: 70px;
+  transform: rotate(20deg);
+}
+.main__right-content {
+  display: flex;
+  align-items: flex-start;
+}
+.main__right-content main {
+  min-height: 100vh;
+  width: 100%;
+}
+.main__right-content main img {
+  margin: 20px;
+  height: 200px;
+  width: 200px;
+  max-height: 350px;
+  max-width: 350px;
+  min-width: 100px;
+  min-height: 100px;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.main__right-content main img.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+.main__right-content main img.fade-out {
+  animation: fadeOut 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.main__right-content__div-btn-img {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.main__right-content__div-btn-img img {
+  margin-top: 20px;
+  margin-left: 20px;
+  height: 30px;
+  width: 30px;
+}
+.main__right-content__div-btn-img button {
+  height: 50px;
+  width: 100px;
+  background-color: burlywood;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+}
+.main__right-content__div-btn-img button:hover {
+  border: 2px solid black;
+  background-color: white;
+}
+.main__right-content__div-btn-img button:active {
+  background-color: burlywood;
+}
+.main__right-content aside {
+  min-height: 100vh;
+  width: 200px;
+  background-color: antiquewhite;
+  padding: 20px;
+  justify-content: center;
+  border-right: 2px solid black;
+}
+
+/*# sourceMappingURL=test.css.map */

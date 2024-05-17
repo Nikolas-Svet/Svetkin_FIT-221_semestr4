@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="test.css">
+    <script src="main.js"></script>
+    <script src="imageManipulation.js"></script>
+</head>
+<body>
+<div class="login">
+    <div class="login__content">
+        <img class="login__content__img-dog"
+             src="https://avatanplus.com/files/resources/original/572f26f8c5a0e15490303be9.png" alt="Image">
+        <h1>Random Dogs</h1>
+        <img width="27" height="27" src="https://img.icons8.com/ios/40/dog-bone.png" alt="dog-bone"/>
+        <span>Привет! Введите имя пользователя</span>
+        <input type="text" placeholder="Имя">
+        <button onclick="showMain()">Далее</button>
+    </div>
+</div>
+<div class="main">
+    <header>
+        <span id="NameUser"></span>
+        <img width="100" height="100" src="https://img.icons8.com/carbon-copy/100/dog-footprint.png"
+             alt="dog-footprint"/>
+    </header>
+    <div class="main__right-content">
+        <aside>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="IncreaseImg()">Увеличить изображение</button>
+                <img width="30" height="30" src="https://img.icons8.com/ios/50/resize-diagonal--v1.png"
+                     alt="resize-diagonal--v1"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="DecreaseImg()">Уменьшить изображение</button>
+                <img width="50" height="50"
+                     src="https://img.icons8.com/external-creatype-outline-colourcreatype/30/external-point-tools-design-creatype-outline-colourcreatype-2.png"
+                     alt="external-point-tools-design-creatype-outline-colourcreatype-2"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="showImg()">Добавить еще одно изображение</button>
+                <img width="50" height="50" src="https://img.icons8.com/ios/30/plus--v1.png" alt="plus--v1"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="deleteImg()">Удалить изображение</button>
+                <img width="50" height="50" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png"
+                     alt="filled-trash"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="RotateImg()">Повернуть изображение</button>
+                <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/rotate-right.png"
+                     alt="rotate-right"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="NextImg()">Следующее изображение</button>
+                <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/circled-chevron-right.png"
+                     alt="circled-chevron-right"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="ResetImg()">Сбросить</button>
+                <img width="50" height="50" src="https://img.icons8.com/ios/50/recurring-appointment.png" alt="recurring-appointment"/>
+            </div>
+            <div class="main__right-content__div-btn-img">
+                <button onclick="showMain()">Выход</button>
+                <img width="50" height="50" src="https://img.icons8.com/ios/50/exit--v1.png" alt="exit--v1"/>
+            </div>
+        </aside>
+        <main>
+        </main>
+    </div>
+</div>
+</body>
+</html>
