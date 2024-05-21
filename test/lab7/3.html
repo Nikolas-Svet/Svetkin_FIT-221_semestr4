@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Click Coordinates</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #coordinates {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function displayCoordinates(event) {
+            var x = event.clientX;
+            var y = event.clientY;
+            var coordinates = "X: " + x + ", Y: " + y;
+            document.getElementById('coordinates').innerText = coordinates;
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.addEventListener('click', displayCoordinates);
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Кликни, чтобы получить координтаы курсора</h1>
+        <div id="coordinates"></div>
+    </div>
+</body>
+</html>

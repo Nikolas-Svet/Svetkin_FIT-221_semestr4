@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function del_div(){
+            document.getElementById('text').remove();
+        }
+    </script>
+</head>
+<body>
+  <div style="width: 100%; height: 100vh;
+  display: flex; align-items: center; justify-content: center;">
+    <button onclick="del_div()" style="margin-right: 50px; height: 40px; width: 100px; background-color: red;">Test</button>
+    <div id="text" style="height: 20%; width: 20%;
+    text-align: center; background-color: bisque;">
+      Текст, который исчезнет
+    </div>
+  </div>
+</body>
+</html>

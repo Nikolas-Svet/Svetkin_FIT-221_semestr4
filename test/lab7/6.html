@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Svetkin_Nikita</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .div_with_six_month {
+            height: 50%;
+            width: 25%;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .month_salary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+    </style>
+    <script>
+        function calculateAverage() {
+            const inputs = document.querySelectorAll('.month_salary input[type="number"]');
+            let total = 0;
+            let count = 0;
+
+            inputs.forEach(input => {
+                const value = parseFloat(input.value);
+                if (!isNaN(value)) {
+                    total += value;
+                    count++;
+                }
+            });
+
+            const average = count ? (total / count).toFixed(2) : 0;
+            document.getElementById('averageSalary').value = average;
+        }
+
+        function resetValues() {
+            const defaultValues = [300, 200, 500, 250, 350, 500];
+            const inputs = document.querySelectorAll('.month_salary input[type="number"]');
+
+            inputs.forEach((input, index) => {
+                input.value = defaultValues[index] || '';
+            });
+
+            calculateAverage();
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('calculateBtn').addEventListener('click', (event) => {
+                event.preventDefault();
+                calculateAverage();
+            });
+            document.getElementById('resetBtn').addEventListener('click', (event) => {
+                event.preventDefault();
+                resetValues();
+            });
+
+            resetValues();
+        });
+    </script>
+</head>
+<body>
+
+<form class="div_with_six_month">
+    <span>Введите начисленную зарплату за следующие месяцы</span>
+    <div style="margin-top: 20px" class="month_salary">
+        <span>Январь</span>
+        <input type="number">
+    </div>
+    <div class="month_salary">
+        <span>Февраль</span>
+        <input type="number">
+    </div>
+    <div class="month_salary">
+        <span>Март</span>
+        <input type="number">
+    </div>
+    <div class="month_salary">
+        <span>Апрель</span>
+        <input type="number">
+    </div>
+    <div class="month_salary">
+        <span>Май</span>
+        <input type="number">
+    </div>
+    <div class="month_salary">
+        <span>Июнь</span>
+        <input type="number">
+    </div>
+    <div class="month_salary">
+        <span>Средняя зарплата</span>
+        <input type="text" id="averageSalary" readonly>
+    </div>
+    <button id="calculateBtn">Вычислить</button>
+    <button id="resetBtn">Обновить</button>
+</form>
+</body>
+</html>
