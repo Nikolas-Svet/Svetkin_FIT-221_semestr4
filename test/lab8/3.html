@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Data Table</title>
+    <style>
+        .green { background-color: lightgreen; }
+        .yellow { background-color: lightyellow; }
+        .red { background-color: lightcoral; }
+    </style>
+</head>
+<body>
+    <button id="loadButton">Загрузить</button>
+    <button id="addButton">Добавить</button>
+    <button id="deleteButton">Удалить</button>
+    <select id="filterGender">
+        <option value="all">Все</option>
+        <option value="male">Мужчины</option>
+        <option value="female">Женщины</option>
+    </select>
+    <table id="humanTable" border="1">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Возраст</th>
+                <th>Пол</th>
+                <th>Адрес</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function getData() {
+            const names = ["John", "Jane", "Mary", "James", "Emily"];
+            const surnames = ["Smith", "Doe", "Johnson", "Brown", "Taylor"];
+            const genders = ["Male", "Female"];
+            const addresses = ["123 Main St", "456 Elm St", "789 Oak St"];
+            const phones = ["123-456-7890", "234-567-8901", "345-678-9012"];
+
+            function getRandomElement(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            const randomSize = getRandomInt(5, 20); // Random size between 5 and 20
+            const data = [];
+
+            for (let i = 0; i < randomSize; i++) {
+                const human = {
+                    name: getRandomElement(names),
+                    surname: getRandomElement(surnames),
+                    age: getRandomInt(0, 100),
+                    gender: getRandomElement(genders),
+                    address: getRandomElement(addresses),
+                    phone: getRandomElement(phones),
+                };
+                data.push(human);
+            }
+
+            return data;
+        }
+
+        const loadButton = document.getElementById('loadButton');
+        const addButton = document.getElementById('addButton');
+        const deleteButton = document.getElementById('deleteButton');
+        const filterGender = document.getElementById('filterGender');
+        const humanTable = document.getElementById('humanTable').querySelector('tbody');
+
+        let humans = [];
+        let displayedHumans = [];
+
+        loadButton.addEventListener('click', async () => {
+            humans = await getData();
+            displayedHumans = [...humans];
+            renderTable();
+        });
+
+        addButton.addEventListener('click', () => {
+            const newHuman = {
+                name: prompt('Имя:'),
+                surname: prompt('Фамилия:'),
+                age: parseInt(prompt('Возраст:'), 10),
+                gender: prompt('Пол:'),
+                address: prompt('Адрес:'),
+                phone: prompt('Телефон:')
+            };
+            humans.push(newHuman);
+            displayedHumans = [...humans];
+            renderTable();
+        });
+
+        deleteButton.addEventListener('click', () => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const indicesToDelete = Array.from(checkboxes).map(cb => parseInt(cb.getAttribute('data-index'), 10));
+            humans = humans.filter((_, index) => !indicesToDelete.includes(index));
+            displayedHumans = [...humans];
+            renderTable();
+        });
+
+        filterGender.addEventListener('change', () => {
+            const filter = filterGender.value;
+            if (filter === 'male') {
+                displayedHumans = humans.filter(human => human.gender === 'Male');
+            } else if (filter === 'female') {
+                displayedHumans = humans.filter(human => human.gender === 'Female');
+            } else {
+                displayedHumans = [...humans];
+            }
+            renderTable();
+        });
+
+        function renderTable() {
+            humanTable.innerHTML = '';
+            displayedHumans.forEach((human, index) => {
+                const row = document.createElement('tr');
+                row.classList.add(getRowClass(human.age));
+                row.innerHTML = `
+                    <td>${human.name}</td>
+                    <td>${human.surname}</td>
+                    <td>${human.age}</td>
+                    <td>${human.gender}</td>
+                    <td>${human.address}</td>
+                    <td>${human.phone}</td>
+                    <td>
+                        <button onclick="editHuman(${index})">Редактировать</button>
+                        <input type="checkbox" data-index="${index}">
+                    </td>
+                `;
+                humanTable.appendChild(row);
+            });
+        }
+
+        window.editHuman = function(index) {
+            const human = displayedHumans[index];
+            human.name = prompt('Имя:', human.name);
+            human.surname = prompt('Фамилия:', human.surname);
+            human.age = parseInt(prompt('Возраст:', human.age), 10);
+            human.gender = prompt('Пол:', human.gender);
+            human.address = prompt('Адрес:', human.address);
+            human.phone = prompt('Телефон:', human.phone);
+            renderTable();
+        };
+
+        function getRowClass(age) {
+            if (age < 18) {
+                return 'green';
+            } else if (age <= 60) {
+                return 'yellow';
+            } else {
+                return 'red';
+            }
+        }
+    </script>
+</body>
+</html>

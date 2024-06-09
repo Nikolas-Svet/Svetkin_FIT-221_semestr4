@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest Example</title>
+</head>
+<body>
+    <script>
+        function request(url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    callback(null, JSON.parse(xhr.responseText));
+                } else if (xhr.readyState === 4) {
+                    callback(xhr.status);
+                }
+            };
+            xhr.send();
+        }
+
+        function requestPromise(url) {
+            return new Promise((resolve, reject) => {
+                request(url, (err, data) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+            });
+        }
+
+        async function fetchData() {
+            try {
+                const catFact = await requestPromise('https://catfact.ninja/fact');
+                console.log('Cat Fact:', catFact.fact);
+
+                const dogImage = await requestPromise('https://dog.ceo/api/breeds/image/random');
+                console.log('Dog Image:', dogImage.message);
+
+                const joke = await requestPromise('https://official-joke-api.appspot.com/random_joke');
+                console.log('Joke:', joke.setup + ' - ' + joke.punchline);
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>

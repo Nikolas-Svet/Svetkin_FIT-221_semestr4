@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest Example</title>
+</head>
+<body>
+    <script>
+        function request(url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    callback(null, JSON.parse(xhr.responseText));
+                } else if (xhr.readyState === 4) {
+                    callback(xhr.status);
+                }
+            };
+            xhr.send();
+        }
+
+        // Запросы последовательно
+        request('https://catfact.ninja/fact', function(err, data) {
+            if (err) {
+                console.error('Error fetching cat fact:', err);
+            } else {
+                console.log('Cat Fact:', data.fact);
+                request('https://dog.ceo/api/breeds/image/random', function(err, data) {
+                    if (err) {
+                        console.error('Error fetching dog image:', err);
+                    } else {
+                        console.log('Dog Image:', data.message);
+                        request('https://official-joke-api.appspot.com/random_joke', function(err, data) {
+                            if (err) {
+                                console.error('Error fetching joke:', err);
+                            } else {
+                                console.log('Joke:', data.setup + ' - ' + data.punchline);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
