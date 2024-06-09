@@ -26,7 +26,6 @@ function showImages() {
     imageUrls.forEach((imageUrl, index) => {
         const imageElement = document.createElement('img');
         imageElement.src = imageUrl;
-        // imageElement.classList.add('fade-in');
         imageElement.style.width = imageSizes[imageUrl].width + 'px';
         imageElement.style.height = imageSizes[imageUrl].height + 'px';
         imageElement.style.border = index === currentIndex ? "4px solid white" : "none";
